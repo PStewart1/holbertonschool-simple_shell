@@ -7,8 +7,12 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <errno.h>
+#include <sys/stat.h>
 
 extern int errno;
 extern char **environ;
+
+char *_getenv(const char *name);
+char *_path(char *str);
 
 #endif /* _MAIN_H_ */
