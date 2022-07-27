@@ -1,0 +1,28 @@
+.\" Manpage for shell.c.
+.\" Contact Paul Stewart or Courtney Brown at 4910@holbertonstudents.com to correct errors or typos.
+.TH man 1 "28 July 2022" "1.0" "shell.c man page"
+.SH NAME
+shell.c \- student implementation of a simple shell
+.SH LIBRARY
+#include "main.h" (local library)
+.SH SYNOPSIS
+.B shell.c
+[command] [options ...] [filename]
+.SH COPYRIGHT
+shell.c is a Holberton School (Tulsa) first trimester assignment
+.SH DESCRIPTION
+.B shell.c
+is an interactive replica of a super simple Unix/Linux command line (Bash) interpreter that executes commands received from standard input.\n
+shell.c is intended to be a conformant implementation of the Bash Shell and its utilities.
+.SH OPTIONS
+shell.c contains delimeters that are separated by spaces, in which the interpreter reads as seperate commands. It interprets the following options when it is invoked:\n
+.B -l
+If the -l option is present, the preceding command will be perfomed in the extended version. For example, ls -l <file> will list all files in a current a directory in addition to given permissions, file creation details, and path.
+.SH SEE ALSO
+Unx/Linux command line
+Bash "sh" man page
+.SH BUGS
+No known bugs.
+.SH AUTHORS
+Paul Stewart (4920@holbertonstudents.com)
+Courtney Brown (4910@hobertonstudents.com)

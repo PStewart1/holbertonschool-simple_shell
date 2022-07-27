@@ -50,7 +50,7 @@ int main(void)
 		printf("#cisfun$ ");
 		getline(&line, &len, stdin);
 		for (i = 0; ; i++, line = NULL)
-		{
+		{	
 			argv[i] = strtok_r(line, " \n", &saveptr);
 			if (argv[i] == NULL)
 				break;
@@ -59,18 +59,18 @@ int main(void)
 		{
 			argv[0] = _path(argv[0]);
 			if (argv[0] == NULL)
-			{
-				fprintf(stderr, "./shell: %s\n", strerror(errno));
+			{	
+				fprintf(stderr, "%s\n", strerror(errno));
 				continue;
 			}
-		}
+		}		
 		pid = fork();
 		if (pid == 0)
-		{
+		{	
 			execve(argv[0], argv, NULL);
-			fprintf(stderr, "./shell: %s\n", strerror(errno));
+			fprintf(stderr, "%s\n", strerror(errno));
 			return (-1);
-		}
+		}	
 		else if (pid < 0)
 			perror("lsh");
 		else
