@@ -16,6 +16,6 @@ extern char **environ;
 char *linecheck(char *argv);
 char *_getenv(const char *name);
 char *_path(char *str);
-void _env();
+void _env(void);
 
 #endif /* _MAIN_H_ */
