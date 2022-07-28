@@ -6,15 +6,13 @@
  *@argv: pointer to argument vectors
  *@envp: pointer to array of environmental variables
  */
-int main(int argc, char *argv[], char *envp[])
+void _env()
 {
 	int i = 0;
 	
-	while (envp[i] != NULL)
+	while (environ[i] != NULL)
 	{
-		printf("%s\n", envp[i]);
+		printf("%s\n", environ[i]);
 		i++;
 	}
-	getchar();
-	return(0);
 }

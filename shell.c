@@ -43,17 +43,29 @@ int main(void)
 	char *argv[2], *saveptr, *line = NULL;
 	size_t len = 0;
 	pid_t pid;
-	int i, mode = 1;
+	int i, mode = 1, getit;
 
 	while (mode)
 	{
 		printf("#cisfun$ ");
-		getline(&line, &len, stdin);
+		getit = getline(&line, &len, stdin);
+		if (getit < 0)
+		{
+			putchar('\n');
+			return (-1);
+		}
 		for (i = 0; ; i++, line = NULL)
 		{	
 			argv[i] = strtok_r(line, " \n", &saveptr);
 			if (argv[i] == NULL)
 				break;
+		}
+		if (strcmp(argv[0], "exit") == 0)
+			return (-1);
+		if (strcmp(argv[0], "env") == 0)
+		{
+			_env();
+			continue;
 		}
 		if (strchr(argv[0], '/') == NULL)
 		{
