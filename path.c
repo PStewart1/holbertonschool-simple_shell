@@ -11,9 +11,9 @@ char *_path(char *str)
 	int j;
 	char *token, *address, *saveptr2, *path = strdup(_getenv("PATH"));
 
-	for (j = 0; ; j++, path = NULL)
+	address = malloc(sizeof(path));
+	for (j = 0; j < 6; j++, path = NULL)
 	{
-		address = malloc(sizeof(path));
 		token = strtok_r(path, ":", &saveptr2);
 		if (token == NULL)
 			break;
@@ -25,9 +25,8 @@ char *_path(char *str)
 			free(path);
 			return (address);
 		}
-		else
-			free(address);
 	}
+	free(address);
 	free(path);
 	return (NULL);
 }

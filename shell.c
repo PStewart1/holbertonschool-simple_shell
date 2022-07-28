@@ -19,6 +19,7 @@ int main(void)
 		linestatus = getline(&line, &len, stdin);
 		if (linestatus < 0)
 			return (0);
+		argv[0] = malloc(sizeof(line));
 		for (i = 0; ; i++, line = NULL)
 		{
 			argv[i] = strtok_r(line, " \n", &saveptr);
@@ -42,7 +43,7 @@ int main(void)
 			perror("fork failed");
 		else
 			wait(NULL);
-		mode = isatty(STDIN_FILENO);
+		mode = isatty(fileno(stdin));
 		free(argv[0]);
 		free(line);
 	}
