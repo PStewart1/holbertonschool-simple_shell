@@ -1,59 +1,24 @@
 #include "main.h"
 
 /**
- * _path - searches PATH for built-in and returns address if found
- * @str: name of built-in
- * Return: pointer to path of builtin, or null if not found
- */
-
-char *_path(char *str)
-{
-	int j;
-	char *token, *address, *saveptr2, *path = strdup(_getenv("PATH"));
-	struct stat st;
-
-	for (j = 0; ; j++, path = NULL)
-	{
-		token = strtok_r(path, ":", &saveptr2);
-		if (token == NULL)
-			break;
-		address = strdup(token);
-		strcat(address, "/");
-		strcat(address, str);
-		if (stat(address, &st) == 0)
-		{
-			free(path);
-			return (address);
-		}
-		else
-			free(address);
-	}
-	free(path);
-	return (NULL);
-}
-
-/**
  * main - Simple Shell
  *
- * Return: Always 0.
+ * Return: Always 0
  */
 
 int main(void)
 {
-	char *argv[2], *saveptr, *line = NULL;
+	char *argv[3], *saveptr, *line = NULL;
 	size_t len = 0;
 	pid_t pid;
-	int i, mode = 1, getit;
+	int i, mode = 1, linestatus;
 
 	while (mode)
 	{
 		printf("#cisfun$ ");
-		getit = getline(&line, &len, stdin);
-		if (getit < 0)
-		{
-			putchar('\n');
-			return (-1);
-		}
+		linestatus = getline(&line, &len, stdin);
+		if (linestatus < 0)
+			return (0);
 		for (i = 0; ; i++, line = NULL)
 		{
 			argv[i] = strtok_r(line, " \n", &saveptr);
@@ -62,7 +27,10 @@ int main(void)
 		}
 		argv[0] = linecheck(argv[0]);
 		if (argv[0] == NULL)
+		{
+			free(line);
 			continue;
+		}
 		pid = fork();
 		if (pid == 0)
 		{
@@ -71,11 +39,12 @@ int main(void)
 			return (-1);
 		}
 		else if (pid < 0)
-			perror("lsh");
+			perror("fork failed");
 		else
 			wait(NULL);
 		mode = isatty(STDIN_FILENO);
+		free(argv[0]);
+		free(line);
 	}
-	free(line);
 	return (0);
 }
