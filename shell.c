@@ -61,7 +61,7 @@ int main(void)
 				break;
 		}
 		if (strcmp(argv[0], "exit") == 0)
-			return (-1);
+			return (0);
 		if (strcmp(argv[0], "env") == 0)
 		{
 			_env();
