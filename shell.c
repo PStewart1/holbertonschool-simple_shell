@@ -55,34 +55,21 @@ int main(void)
 			return (-1);
 		}
 		for (i = 0; ; i++, line = NULL)
-		{	
+		{
 			argv[i] = strtok_r(line, " \n", &saveptr);
 			if (argv[i] == NULL)
 				break;
 		}
-		if (strcmp(argv[0], "exit") == 0)
-			return (0);
-		if (strcmp(argv[0], "env") == 0)
-		{
-			_env();
+		argv[0] = linecheck(argv[0]);
+		if (argv[0] == NULL)
 			continue;
-		}
-		if (strchr(argv[0], '/') == NULL)
-		{
-			argv[0] = _path(argv[0]);
-			if (argv[0] == NULL)
-			{	
-				fprintf(stderr, "%s\n", strerror(errno));
-				continue;
-			}
-		}		
 		pid = fork();
 		if (pid == 0)
-		{	
+		{
 			execve(argv[0], argv, NULL);
 			fprintf(stderr, "%s\n", strerror(errno));
 			return (-1);
-		}	
+		}
 		else if (pid < 0)
 			perror("lsh");
 		else

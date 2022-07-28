@@ -13,6 +13,7 @@
 extern int errno;
 extern char **environ;
 
+char *linecheck(char *argv);
 char *_getenv(const char *name);
 char *_path(char *str);
 void _env();
