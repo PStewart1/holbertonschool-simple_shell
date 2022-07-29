@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	char *argv[3], *saveptr, *line = NULL;
+	char *argv[3], *line = NULL;
 	size_t len = 0;
 	pid_t pid;
 	int i, mode = 1, linestatus;
@@ -18,18 +18,21 @@ int main(void)
 		printf("#cisfun$ ");
 		linestatus = getline(&line, &len, stdin);
 		if (linestatus < 0)
+		{
+			free(line);
 			return (0);
-		argv[0] = malloc(sizeof(line));
+		}
 		for (i = 0; ; i++, line = NULL)
 		{
-			argv[i] = strtok_r(line, " \n", &saveptr);
+			argv[i] = strtok(line, " \n");
 			if (argv[i] == NULL)
 				break;
 		}
+		free(line);
 		argv[0] = linecheck(argv[0]);
 		if (argv[0] == NULL)
 		{
-			free(line);
+			free(argv[0]);
 			continue;
 		}
 		pid = fork();
@@ -37,6 +40,7 @@ int main(void)
 		{
 			execve(argv[0], argv, NULL);
 			fprintf(stderr, "%s\n", strerror(errno));
+			free(argv[0]);
 			return (-1);
 		}
 		else if (pid < 0)
@@ -45,7 +49,6 @@ int main(void)
 			wait(NULL);
 		mode = isatty(fileno(stdin));
 		free(argv[0]);
-		free(line);
 	}
 	return (0);
 }

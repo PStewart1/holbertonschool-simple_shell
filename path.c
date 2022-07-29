@@ -9,9 +9,8 @@
 char *_path(char *str)
 {
 	int j;
-	char *token, *address, *saveptr2, *path = strdup(_getenv("PATH"));
+	char *token, *address = malloc(1024), *saveptr2, *path = _getenv("PATH");
 
-	address = malloc(sizeof(path));
 	for (j = 0; j < 6; j++, path = NULL)
 	{
 		token = strtok_r(path, ":", &saveptr2);
@@ -26,8 +25,8 @@ char *_path(char *str)
 			return (address);
 		}
 	}
-	free(address);
 	free(path);
+	free(address);
 	return (NULL);
 }
 
