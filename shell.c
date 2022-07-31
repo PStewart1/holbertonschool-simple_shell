@@ -11,14 +11,14 @@ int main(void)
 	char *argv[3], *saveptr, *line = NULL;
 	size_t len = 0;
 	pid_t pid;
-	int i, mode = 1, linestatus;
+	int i, mode = 1;
 
 	while (mode)
 	{
-		printf("#cisfun$ ");
-		linestatus = getline(&line, &len, stdin);
-		if (linestatus < 0)
-			return (0);
+		if (isatty(STDIN_FILENO) == 1)
+			printf("#cisfun$ ");
+		if (getline(&line, &len, stdin) == EOF)
+			break;
 		argv[0] = malloc(sizeof(line));
 		for (i = 0; ; i++, line = NULL)
 		{
@@ -43,7 +43,7 @@ int main(void)
 			perror("fork failed");
 		else
 			wait(NULL);
-		mode = isatty(fileno(stdin));
+		mode = isatty(STDIN_FILENO);
 		free(argv[0]);
 		free(line);
 	}
