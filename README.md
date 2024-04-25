@@ -23,6 +23,6 @@
 
 <h2> Authors </h2>
 <p>
-<li> Paul Stewart - Future ...(specalization) "linkedin link"</li>
+<li> Paul Stewart - Future Full-Stack Engineer - <a href="https://www.linkedin.com/in/paul-s88/">LinkedIn</a></li>
 <li> Courtney Brown - Future Devops Engineer - <a href="https://www.linkedin.com/in/courtney-brown-699b96216/">LinkedIn</a></li>
 </p>
