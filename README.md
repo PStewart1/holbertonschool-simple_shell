@@ -8,7 +8,7 @@
 
 <h2> C-Shell Features</h2>
 <p>
-<li> Displays a prmopt and waits for user's input.</li>
+<li> Displays a prompt and waits for user's input.</li>
 <li> If a command cannot be found, or user's input is invalid, an error message will be displayed to standard output.</li>
 <li> The "end of file" condition using <code> Ctrl + D</code></li>
 <li> Handles command lines with arguments passed in </li>
